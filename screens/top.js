@@ -9,15 +9,20 @@ import {
     Alert
 } from 'react-native'
 
-import Icon from 'react-native-vector-icons/Ionicons'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
-export class Test extends Component {
+export class Top extends Component {
     static navigationOptions = {
-        headerType: 'none',
-        header: ({navigate}) => ({
-          style: styles.header,
-          title: 'Test'
-      })
+        title: 'Top',
+        tabBar: {
+            icon: ({ tintColor }) => (
+                <Icon
+                name="thumbs-up"
+                size={24}
+                color={tintColor}
+                />
+            ),
+        }
     }
     constructor() {
         super()

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import * as firebase from 'firebase'
-import Icon from 'react-native-vector-icons/Ionicons'
-import MapView from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import MapStyle from '../constants/google-maps.json'
 
 import {
     View,
@@ -11,17 +11,23 @@ import {
     StyleSheet
 } from 'react-native'
 
+import Icon from 'react-native-vector-icons/Entypo'
+
 export class Home extends Component {
+    static navigationOptions = {
+        title: 'Home',
+        tabBar: {
+            icon: ({ tintColor }) => (
+                <Icon
+                name="map"
+                size={24}
+                color={tintColor}
+                />
+            ),
+        }
+    }
     constructor() {
         super()
-        firebase.initializeApp({
-            apiKey: "AIzaSyDe1ELmrBy85M9tK6jzMMCxrmVgxoE5Yl0",
-            authDomain: "locationapp-12f4a.firebaseapp.com",
-            databaseURL: "https://locationapp-12f4a.firebaseio.com",
-            storageBucket: "locationapp-12f4a.appspot.com",
-            messagingSenderId: "342674853619"
-        })
-
         this.state = {
             initialPosition: 'unknown',
             lastPosition: 'unknown',
@@ -71,16 +77,31 @@ export class Home extends Component {
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
         };
+        const latLong2 = {
+            latitude: latitude+0.005,
+            longitude
+        }
         return (
             <View style={styles.container}>
                 <MapView
                     style={{...StyleSheet.absoluteFillObject}}
+                    provider={PROVIDER_GOOGLE}
                     region={latLong}
-                >
+                    customMapStyle={MapStyle}>
                     <MapView.Marker
                         coordinate={latLong}
                         title='Hey'
                     />
+                    <MapView.Circle 
+                        center={latLong} 
+                        radius={400}
+                        strokeWidth={0}
+                        fillColor={'rgba(255,0,0,0.5)'} />
+                    <MapView.Circle 
+                        center={latLong2} 
+                        radius={400}
+                        strokeWidth={0}
+                        fillColor={'rgba(0,255,0,0.4)'} />
                 </MapView>
             </View> 
         )
@@ -95,8 +116,5 @@ const styles = StyleSheet.create({
   center: {
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  header: {
-        backgroundColor: 'white'
-    },
+  }
 });

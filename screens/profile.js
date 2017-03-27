@@ -12,9 +12,7 @@ import {
 
 export class Profile extends Component {
     static navigationOptions = {
-        header: ({navigate}) => ({
-          style: styles.header
-      })
+        title: 'Profile'
     }
     state = {
         isDateTimePickerVisible: false,
