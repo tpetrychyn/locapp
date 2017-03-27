@@ -27,10 +27,12 @@ const RootNavigator = StackNavigator({
       // Hides stack header on android
       navigationOptions: { header: { visible: false } },
       animationEnabled: true,
+      tabBarPosition: 'bottom',
       tabBarOptions: {
         activeTintColor: '#1d2c4d',
         indicatorStyle: {
-          color: 'black',
+          //top: 0,
+          height: 4,
           backgroundColor: 'black'
         },
         labelStyle: {
