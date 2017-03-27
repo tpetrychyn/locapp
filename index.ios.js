@@ -31,7 +31,7 @@ const TestRoutes = StackNavigator({
 const Tabs = {
   Home: { screen: Home },
   Test: { screen: TestRoutes },
-  Test2: { screen: TestRoutes }
+  Profile: { screen: Profile },
 }
 const RootNavigator =
 	TabNavigator({
